@@ -37,6 +37,7 @@ MainWindowCallback(HWND Window, UINT Message, WPARAM WParam, LPARAM LParam)
             int Y = Paint.rcPaint.top;
             LONG Height = Paint.rcPaint.bottom - Paint.rcPaint.top;
             LONG Width = Paint.rcPaint.right - Paint.rcPaint.left;
+            static DWORD Operation = WHITENESS;
             PatBlt(DeviceContext, X, Y, Width, Height, WHITENESS);
             EndPaint(Window, &Paint);
              
@@ -49,12 +50,8 @@ MainWindowCallback(HWND Window, UINT Message, WPARAM WParam, LPARAM LParam)
         } break;
 
     }
-
-    
         return(Result);
-
 }
-
 
 int CALLBACK
 WinMain(HINSTANCE Instance,
