@@ -21,6 +21,7 @@ MainWindowCallback(HWND Window, UINT Message, WPARAM WParam, LPARAM LParam)
 
         case WM_CLOSE:
         {
+            PostQuitMessage(0);
             OutputDebugStringA("WM_CLOSE\n");
         } break;
 
@@ -103,13 +104,13 @@ int ShowCode)
                 }
             }
             else
-            {
-
+            {   
+                // logging
             }
     }
     else
     {
-        //todo: Logging
+        // logging
     }
 
     return(0);
