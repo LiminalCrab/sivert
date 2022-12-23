@@ -1,7 +1,11 @@
 #include <windows.h>
 
+#define internal static
+#define local_persist static
+#define global_variable static
+
 // Temporary global variable
-static bool GlobalRunning = true;
+global_variable bool GlobalRunning = true;
 
 LRESULT CALLBACK
 MainWindowCallback(HWND Window, UINT Message, WPARAM WParam, LPARAM LParam)
@@ -46,7 +50,7 @@ MainWindowCallback(HWND Window, UINT Message, WPARAM WParam, LPARAM LParam)
         int Y = Paint.rcPaint.top;
         LONG Height = Paint.rcPaint.bottom - Paint.rcPaint.top;
         LONG Width = Paint.rcPaint.right - Paint.rcPaint.left;
-        static DWORD Operation = WHITENESS;
+        local_persist DWORD Operation = WHITENESS;
         PatBlt(DeviceContext, X, Y, Width, Height, WHITENESS);
         EndPaint(Window, &Paint);
     }
@@ -96,9 +100,10 @@ WinMain(HINSTANCE Instance,
 
         if (WindowHandle)
         {
-            MSG Message;
-            for (;;) // infinite for loop
+            GlobalRunning = true;
+            while(GlobalRunning)
             {
+                MSG Message;
                 BOOL MessageResult = GetMessage(&Message, 0, 0, 0);
                 if (MessageResult > 0)
                 {
