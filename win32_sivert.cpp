@@ -4,6 +4,10 @@
 #define local_persist static
 #define global_variable static
 
+internal void 
+ResizeDIBSection(){
+}
+
 // Temporary global variable
 global_variable bool GlobalRunning = true;
 
@@ -15,7 +19,11 @@ MainWindowCallback(HWND Window, UINT Message, WPARAM WParam, LPARAM LParam)
     switch (Message)
     {
     case WM_SIZE:
-    {
+    {   RECT ClientRect;
+        BOOL GetClientRect(Window, &ClientRect)
+        int Width = ClientRect.right - Paint.rcPaint.left;
+        int Height = ClientRect.bottom - Paint.rcPaint.top;
+        ResizeDIBSection(Width, Height);
         OutputDebugStringA("WM_SIZE\n");
     }
     break;
